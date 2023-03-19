@@ -1,6 +1,7 @@
 using DiplomskiV3.Data;
 using DiplomskiV3.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace DiplomskiV3.Controllers
@@ -23,17 +24,25 @@ namespace DiplomskiV3.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IEnumerable<WeatherForecast>> GetAsync()
+        public async Task<IEnumerable<Movie>> GetAsync()
         {
-            Movie a = _context.Movie.First();
-            Console.WriteLine(a.Id.ToString()+" +"+a.Title+" "+a.Genre);
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            IEnumerable<Movie> a = _context.Movie.ToList();
+
+            return a;
+        }
+        [HttpPost("PostMovie")]
+        public async Task<IEnumerable<Movie>> Post(Movie a)
+        {
+            Console.WriteLine("goriiiiiiiiiiiiiiiii");
+            Console.WriteLine(a.Title);
+            List<Movie> t = new();
+            Movie t1 =new();
+            t1.Title = "raid seve";
+            t.Add(t1);
+            t.Add(a);
+          
+            IEnumerable <Movie> ai =t;
+            return ai;
         }
     }
 }

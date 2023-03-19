@@ -1,8 +1,14 @@
 using DiplomskiV3.Data;
+using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
-
+/*builder.Services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+    .AddCertificate();
+*/
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -20,11 +26,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+//app.UseAuthentication();
 app.MapControllers();
-
 app.Run();
